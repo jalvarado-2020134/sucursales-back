@@ -25,6 +25,21 @@ exports.findCompany = async (username) => {
     }
 } 
 
+exports.findProduct = async function(company, product){
+    const products = company.products;
+    let keys = Object.keys(products);
+
+    for(let key of keys){
+        if(products[key].product.toString() !== product.toString()){
+            continue;
+        }else{
+            return products[key]._id;
+        }
+    }
+    return undefined
+}
+
+
 exports.checkPassword = async (password, hash) => {
     try {
         return bcrypt.compareSync(password, hash);
