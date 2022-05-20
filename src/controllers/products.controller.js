@@ -155,3 +155,35 @@ exports.getProductsByAsc = async(req,res)=>{
         return res.status(500).send({message: 'Error'});
     }
 }
+
+exports.productsByName = async(req,res)=>{
+    try{
+        const params = req.body;
+        const data ={
+            name: params.name
+        };
+        const msg = validateData(data);
+        if(msg)return res.status(400).send(msg);
+        const product = await Product.find({name:{$regex: params.name, $options: 'i'}})
+            return res.send({product})
+    }catch(err){
+        console.log(err);
+        return res.status(500).send({message: 'Error', err})
+    }
+}
+
+exports.productsByProvider = async(req,res)=>{
+    try{
+        const params = req.body;
+        const data ={
+            provider: params.provider
+        };
+        const msg = validateData(data);
+        if(msg)return res.status(400).send(msg);
+        const product = await Product.find({provider:{$regex: params.provider, $options: 'i'}})
+            return res.send({product})
+    }catch(err){
+        console.log(err);
+        return res.status(500).send({message: 'Error', err})
+    }
+}
