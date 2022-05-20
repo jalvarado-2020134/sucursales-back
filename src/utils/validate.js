@@ -82,6 +82,19 @@ exports.checkUpdate = async (params) => {
     }
 }
 
+exports.checkUpdateCompany = async (params) => {
+    try {
+        if (params.password || Object.entries(params).length === 0 || params.role || params.products) {
+            return false;
+        } else {
+            return true;
+        }
+    } catch (err) {
+        console.log(err);
+        return err;
+    }
+}
+
 exports.checkUpdateProduct = async (params) => {
     try {
         if (params.password || Object.entries(params).length === 0 || params.role || params.products) {
@@ -135,19 +148,7 @@ exports.findStock = async (branch, product) => {
     return undefined
 }
 
-exports.findProduct = async (branch, product) => {
-    const branchProducts = branch.branchProducts;
-    let keys = Object.keys(branchProducts);
 
-    for (let key of keys) {
-        if (branchProducts[key].product.toString() !== product.toString()) {
-            continue;
-        } else {
-            return branchProducts[key];
-        }
-    }
-    return undefined
-}
 
 exports.findProductPlace = async (branch, product) => {
     const branchProducts = branch.branchProducts;

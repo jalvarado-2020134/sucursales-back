@@ -15,5 +15,7 @@ api.get('/myCompany', [mdAuth.ensureAuth], companyController.myCompany);
 
 api.post('/register', companyController.register);
 api.post('/login', companyController.login);
+api.put('/update/:id', companyController.update);
+api.delete('/delete/:id', companyController.delete);
 
 module.exports = api;

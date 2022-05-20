@@ -1,9 +1,10 @@
 'use strict';
 
-const { validateData, findCompany, checkPassword, encrypt, checkUpdate, checkUpdate_Admin, allDelete } = require('../utils/validate');
+const { validateData, findCompany, checkPassword, encrypt, checkUpdateCompany, checkUpdate_Admin, allDelete } = require('../utils/validate');
 const Office = require('../models/office.model');
 const Company = require('../models/company.model');
 const jwt = require('../services/jwt');
+const { del } = require('express/lib/application');
 
 exports.registerCompany_Admin = async (req, res) => {
     try {
@@ -175,6 +176,67 @@ exports.login = async (req, res) => {
         return res.status(500).send({ message: 'Error al iniciar sesión' });
     }
 };
+
+exports.update = async(req,res)=>{
+    try{
+        const companyId = req.params.id;
+        const params = req.body;
+
+        const company = await Company.findOne({_id: companyId})
+        if(company){
+            const Updated = await checkUpdateCompany(params);
+            if(Updated === false){
+                return res.status(400).send({message: 'Invalid params'})
+            }else{
+                const Role = await Company.findOne({_id: companyId})
+                if(Role.role === 'ADMIN'){
+                    return res.status(403).send({message: 'You cant update this company'});
+                }else{
+                    const checkCompany = await findCompany(params.username);
+                    if(checkCompany && company.username != params.username){
+                        return res.send({message: 'Username already in use'})
+                    }else{
+                        const updateCompany = await Company.findOneAndUpdate({_id: companyId}, params,{new:true}).lean();
+                        if(!updateCompany){
+                            return res.send({message: 'Coud not update the company'})
+                        }else{
+                            return res.send({message: 'Company updated successfully', updateCompany})
+                        }
+                    }
+                }
+            }
+        }else{
+            return res.send({message:'Company not found'})
+        }
+    }catch(err){
+        console.log(err);
+        return res.status(500).send({message:'Error'})
+    }
+};
+
+exports.delete = async(req,res)=>{
+    try{
+        const companyId = req.params.id;
+        
+        const company = await Company.findOne({_id: companyId}).populate('products')
+        if(company.role === 'ADMIN'){
+            return res.status(403).send({message: 'You cant delete this company'});
+        }else{
+            await Office.deleteMany({company: companyId})
+            allDelete(company.products);
+            const deleteCompany = await Company.findOneAndDelete({_id: companyId});
+            if(!deleteCompany){
+                return res.status(500).send({message: 'Company not found'})
+            }else{
+                return res.send({message: 'Company delete successfully', deleteCompany})
+            }
+        }
+    }catch(err){
+        console.log(err);
+        return res.status(500).send({message: 'Error'});
+    }
+}
+
 
 exports.getCompany = async (req, res) => {
     try {
