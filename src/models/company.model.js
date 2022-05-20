@@ -13,6 +13,6 @@ const companySchema = mongoose.Schema({
         product: { type: mongoose.Schema.ObjectId, ref: 'Product' },
         stock: Number
     }]
-});
+}); 
 
 module.exports = mongoose.model('Company', companySchema); 

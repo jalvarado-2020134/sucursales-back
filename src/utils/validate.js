@@ -120,3 +120,80 @@ exports.checkProduct = async (params) => {
         return err;
     }
 } 
+
+exports.findStock = async (branch, product) => {
+    const branchProducts = branch.branchProducts;
+    let keys = Object.keys(branchProducts);
+
+    for (let key of keys) {
+        if (branchProducts[key].product.toString() !== product.toString()) {
+            continue;
+        } else {
+            return branchProducts[key].stock;
+        }
+    }
+    return undefined
+}
+
+exports.findProduct = async (branch, product) => {
+    const branchProducts = branch.branchProducts;
+    let keys = Object.keys(branchProducts);
+
+    for (let key of keys) {
+        if (branchProducts[key].product.toString() !== product.toString()) {
+            continue;
+        } else {
+            return branchProducts[key];
+        }
+    }
+    return undefined
+}
+
+exports.findProductPlace = async (branch, product) => {
+    const branchProducts = branch.branchProducts;
+    let keys = Object.keys(branchProducts);
+
+    for (let key of keys) {
+        if (branchProducts[key].product.toString() !== product.toString()) {
+            continue;
+        } else {
+            return key;
+        }
+    }
+    return undefined
+}
+
+
+exports.findProductOnCompany = async (company, product) => {
+    try {
+        const products = company.products;
+
+        let keys = Object.keys(products);
+
+        for (let key of keys) {
+            if (products[key].toString() !== product.toString()) {
+                continue;
+            } else {
+                return products[key]._id;
+            }
+        }
+        return undefined
+    } catch (err) {
+        console.log(err);
+        return err;
+    }
+}
+
+exports.findOfficeToProduct = async (branch, branchProductId) => {
+    const branchProducts = branch.branchProducts;
+    let keys = Object.keys(branchProducts);
+
+    for (let key of keys) {
+        if (branchProducts[key]._id.toString() !== branchProductId.toString()) {
+            continue;
+        } else {
+            return branchProducts[key];
+        }
+    }
+    return undefined
+}

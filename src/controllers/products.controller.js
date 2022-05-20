@@ -121,3 +121,37 @@ exports.getProducts = async(req,res)=>{
         return res.status(500).send({message: 'Error getting products'});
     }
 }
+
+exports.getProductsByDes = async(req,res)=>{
+    try{
+        const company = await Company.findOne({_id: req.user.sub}).populate('products');
+        const products = company.products.sort((a,b)=>{
+            return b.stock - a.stock
+        })
+        if(products === null || products === undefined){
+            return res.send({message: 'Products not found'})
+        }else{
+            return res.send({message:'Your products', products})
+        }
+    }catch(err){
+        console.log(err);
+        return res.status(500).send({message: 'Error'});
+    }
+}
+
+exports.getProductsByAsc = async(req,res)=>{
+    try{
+        const company = await Company.findOne({_id: req.user.sub}).populate('products');
+        const products = company.products.sort((a,b)=>{
+            return a.stock - b.stock
+        })
+        if(products===null || products === undefined){
+            return res.send({message:'Products not found'})
+        }else{
+            return res.send({message: 'Your products', products})
+        }
+    }catch(err){
+        console.log(err);
+        return res.status(500).send({message: 'Error'});
+    }
+}
