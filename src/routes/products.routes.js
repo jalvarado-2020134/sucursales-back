@@ -10,5 +10,6 @@ api.put('/update/:id', [mdAuth.ensureAuth], productsController.updateProduct);
 api.delete('/delete/:id', [mdAuth.ensureAuth], productsController.delete);
 api.get('/getProduct/:id', [mdAuth.ensureAuth], productsController.getProduct);
 api.get('/getProducts', [mdAuth.ensureAuth], productsController.getProducts);
+api.post('/sendProducts/:id', [mdAuth.ensureAuth], productsController.sendProducts);
 
 module.exports = api;
