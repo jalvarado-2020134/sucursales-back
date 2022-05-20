@@ -17,7 +17,7 @@ exports.addOffice = async(req,res)=>{
         if(!msg){
             const addOffice = new Office(data);
             await addOffice.save();
-            return res.send({message: 'Office created successfully', Office});
+            return res.send({message: 'Office created successfully', addOffice});
         }else{
             return res.status(400).send(msg);
         }

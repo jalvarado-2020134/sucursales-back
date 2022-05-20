@@ -10,6 +10,7 @@ api.put('/updateCompany_Admin/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], company
 api.delete('/deleteCompany_Admin/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], companyController.deleteCompany_Admin);
 api.get('/getCompany/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], companyController.getCompany);
 api.get('/getCompanies',[mdAuth.ensureAuth, mdAuth.isAdmin], companyController.getCompanies);
+api.get('/myCompany', [mdAuth.ensureAuth], companyController.myCompany);
 
 
 api.post('/register', companyController.register);

@@ -1,6 +1,7 @@
 'use strict';
 
-const { validateData, findCompany, checkPassword, encrypt, checkUpdate, checkUpdate_Admin } = require('../utils/validate');
+const { validateData, findCompany, checkPassword, encrypt, checkUpdate, checkUpdate_Admin, allDelete } = require('../utils/validate');
+const Office = require('../models/office.model');
 const Company = require('../models/company.model');
 const jwt = require('../services/jwt');
 
@@ -87,26 +88,28 @@ exports.deleteCompany_Admin = async (req, res) => {
     try {
         const companyId = req.params.id;
 
-        const company = await Company.findOne({ _id: companyId });
-        if (!company) {
-            return res.send({ message: 'Company not found' })
-        } else {
-            if (company.role === 'ADMIN') {
-                return res.status(403).send({ message: 'You can´t delete this company' });
-            } else {
-                const deleteCompany = await Company.findOneAndDelete({ _id: companyId });
-                if (!deleteCompany) {
-                    return res.status(500).send({ message: 'Company not found' })
-                } else {
-                    return res.send({ message: 'Company deleted succesfully' })
+        const company = await Company.findOne({_id: companyId});
+        if(!company){
+            return res.send({message: 'Company not found'})
+        }else{
+            if(company.role === 'ADMIN'){
+                return res.status(403).send({message: 'You cant delete this company'});
+            }else{
+                await Office.deleteMany({company: companyId})
+                allDelete(company.products);
+                const deleteCompany = await Company.findOneAndDelete({_id: companyId});
+                if(!deleteCompany){
+                    return res.status(500).send({message: 'Company already deleted'})
+                }else{
+                    return res.send({message: 'Company deleted', deleteCompany})
                 }
             }
         }
-    } catch (err) {
+    }catch(err){
         console.log(err);
-        return res.status(500).send({ message: 'Error deleting this company' });
+        return res.status(500).send({message: 'Error deleting company'});
     }
-};
+}
 
 
 
@@ -173,67 +176,6 @@ exports.login = async (req, res) => {
     }
 };
 
-exports.update = async (req, res) => {
-    try {
-        const companyId = req.user.sub;
-        const params = req.body;
-
-        const company = await Company.findOne({ _id: companyId })
-        if (company) {
-            const checkUpdated = await checkUpdate(params);
-            if (checkUpdated === false) {
-                return res.status(400).send({ message: 'Invalid params' })
-            } else {
-                const checkRole = await Company.findOne({ _id: companyId })
-                if (checkRole.role === 'ADMIN') {
-                    return res.status(403).send({ message: 'No puedes editar tu usuario si tienes el rol ADMIN' });
-                } else {
-                    const checkCompany = await findCompany(params.username);
-                    if (checkCompany && company.username != params.username) {
-                        return res.send({ message: 'Este nombre de usuario ya esta en uso' })
-                    } else {
-                        const updateCompany = await Company.findOneAndUpdate({ _id: companyId }, params, { new: true }).lean();
-                        if (!updateCompany) {
-                            return res.send({ message: 'No se ha podido actualizar la empresa' })
-                        } else {
-                            return res.send({ message: 'Empresa actualizada', updateCompany })
-                        }
-                    }
-                }
-            }
-        } else {
-            return res.send({ message: 'Esta empresa no existe' })
-        }
-    } catch (err) {
-        console.log(err);
-        return res.status(500).send({ message: 'Error actualizando la empresa' });
-    }
-};
-
-exports.delete = async (req, res) => {
-    try {
-        const companyId = req.user.sub;
-
-        const company = await Company.findOne({ _id: companyId }).populate('products')
-        if (company.role === 'ADMIN') {
-            return res.status(403).send({ message: 'No puede eliminar usuarios de rol ADMIN' });
-        } else {
-            await BranchOffice.deleteMany({ company: companyId })
-            deleteProducts(company.products);
-            const deleteCompany = await Company.findOneAndDelete({ _id: companyId });
-            if (!deleteCompany) {
-                return res.status(500).send({ message: 'Empresa no encontrada' })
-            } else {
-                return res.send({ message: 'Cuenta eliminada' })
-            }
-        }
-    } catch (err) {
-        console.log(err);
-        return res.status(500).send({ message: 'Error eliminando la empresa' });
-    }
-};
-
-
 exports.getCompany = async (req, res) => {
     try {
         const companyId = req.params.id;
@@ -259,3 +201,20 @@ exports.getCompanies = async (req, res) => {
         return res.status(500).send({ message: 'Error getting companies' });
     }
 };
+
+exports.myCompany = async(req,res)=>{
+    try{
+        const companyId = req.user.sub;
+        const company = await Company.findOne({_id: companyId}).lean();
+        delete company.products;
+        delete company.role;
+        if(!company){
+            return res.send({message:'Your company does not exist'})
+        }else{
+            return res.send({message: 'Your company', company});
+        }
+    }catch (err) {
+        console.log(err)
+        return res.status(500).send({ message: 'Error obteniendo la empresa' });
+    }
+}

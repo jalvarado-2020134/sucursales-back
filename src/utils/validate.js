@@ -39,6 +39,17 @@ exports.findProduct = async function(company, product){
     return undefined
 }
 
+exports.allDelete = async (products) => {
+    try {
+        for (let product of products) {
+            let productId = product._id.toString()
+            await Product.findOneAndDelete({ _id: productId })
+        }
+    } catch (err) {
+        console.log(err);
+        return err;
+    }
+}
 
 exports.checkPassword = async (password, hash) => {
     try {

@@ -14,7 +14,7 @@ exports.createToken = async (user)=>{
             email: user.emai,
             role: user.role,
             iat: moment().unix(),
-            exp: moment().add(6, 'hour').unix()
+            exp: moment().add(12, 'hour').unix()
         }
         return jwt.encode(payload, secretKey);
     }catch(err){
