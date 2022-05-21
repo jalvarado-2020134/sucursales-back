@@ -1,0 +1,745 @@
+{
+	"info": {
+		"_postman_id": "2cdce3ec-1ab3-491a-98dc-18e08301ed36",
+		"name": "Sucursales",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20791501"
+	},
+	"item": [
+		{
+			"name": "Companies",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "SuperAdmin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/company/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"company",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Gallo",
+									"type": "text"
+								},
+								{
+									"key": "typeOfCompany",
+									"value": "Bebidas",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "CervezaGallo",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "cgallo@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "gallo123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/company/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"company",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register_ Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3200/company/registerCompany_Admin",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"company",
+								"registerCompany_Admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update_Admin",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Mjg0MzMzYjRiNTdhZGRkNzJjNmU1ZjQiLCJuYW1lIjoiV2FsbWFydCIsInVzZXJuYW1lIjoiU3VwZXJBZG1pbiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1MjgzMjIwMiwiZXhwIjoxNjUyODUzODAyfQ.gLcLvderAY8dvJC12prtUuerRw3CaW0dGJuOUu46lTM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "typeOfCompany",
+									"value": "Comida Rapida",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "ADMIN",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/company/updateCompany_Admin/id",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"company",
+								"updateCompany_Admin",
+								"id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3200/company/deleteCompany_Admin",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"company",
+								"deleteCompany_Admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Company",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3200/company/getCompany/id",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"company",
+								"getCompany",
+								"id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Companies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3200/company/getCompanies",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"company",
+								"getCompanies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My Company",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Mjg0MzMzYjRiNTdhZGRkNzJjNmU1ZjQiLCJuYW1lIjoiV2FsbWFydCIsInVzZXJuYW1lIjoiU3VwZXJBZG1pbiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1MzAwNDY4MCwiZXhwIjoxNjUzMDI2MjgwfQ.VTzYiOGTx9qMpff1Qc9HmIGzaTQg23EqNN9xLrnSO3k",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3200/company/myCompany",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"company",
+								"myCompany"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Despensa Familiar",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/company/update/6286db8ce0c315fd42843be0",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"company",
+								"update",
+								"6286db8ce0c315fd42843be0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3200/company/delete/6286db8ce0c315fd42843be0",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"company",
+								"delete",
+								"6286db8ce0c315fd42843be0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Office",
+			"item": [
+				{
+					"name": "ADD Office",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Mjg0MzMzYjRiNTdhZGRkNzJjNmU1ZjQiLCJuYW1lIjoiV2FsbWFydCIsInVzZXJuYW1lIjoiU3VwZXJBZG1pbiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1MjgzMjM4NywiZXhwIjoxNjUyODUzOTg3fQ.mcD_9W8IKl76An-ikApoUG5eeLrNFsfiX9eIw00fIUQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Roosvelt",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Zona 7",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/office/addOffice",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"office",
+								"addOffice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Office",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Offices",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Mjg0MzMzYjRiNTdhZGRkNzJjNmU1ZjQiLCJuYW1lIjoiV2FsbWFydCIsInVzZXJuYW1lIjoiU3VwZXJBZG1pbiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1MjkyNDAyMywiZXhwIjoxNjUyOTQ1NjIzfQ.JphQZcmbpYYZBDIxHHo1uOEQTisMupmZTtsaXVNMyIc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3200/office/getOffices",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"office",
+								"getOffices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Office",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Mjg0MzMzYjRiNTdhZGRkNzJjNmU1ZjQiLCJuYW1lIjoiV2FsbWFydCIsInVzZXJuYW1lIjoiU3VwZXJBZG1pbiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1MjgzMjM4NywiZXhwIjoxNjUyODUzOTg3fQ.mcD_9W8IKl76An-ikApoUG5eeLrNFsfiX9eIw00fIUQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "address",
+									"value": "Zona2 ",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/office/update/628448c8d53b27629d15ddfb",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"office",
+								"update",
+								"628448c8d53b27629d15ddfb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Office",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "New Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Mjg2ZTFkMDhiYmU3ODViODc2ZTU1NDYiLCJuYW1lIjoiR2FsbG8iLCJ0eXBlT2ZDb21wYW55IjoiQmViaWRhcyIsInVzZXJuYW1lIjoiQ2VydmV6YUdhbGxvIiwicm9sZSI6IkNPTVBBTlkiLCJpYXQiOjE2NTMwMDY4MjQsImV4cCI6MTY1MzA1MDAyNH0.qojRGXxGfAiyP5HS7hOunas_i-bz38gc10hptRLnIc8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Jugos",
+									"type": "text"
+								},
+								{
+									"key": "provider",
+									"value": "Kerns",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "8",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/products/newProduct",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"products",
+								"newProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Mjg2ZTFkMDhiYmU3ODViODc2ZTU1NDYiLCJuYW1lIjoiR2FsbG8iLCJ0eXBlT2ZDb21wYW55IjoiQmViaWRhcyIsInVzZXJuYW1lIjoiQ2VydmV6YUdhbGxvIiwicm9sZSI6IkNPTVBBTlkiLCJpYXQiOjE2NTMwMDY4MjQsImV4cCI6MTY1MzA1MDAyNH0.qojRGXxGfAiyP5HS7hOunas_i-bz38gc10hptRLnIc8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "stock",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/products/update/6286e2927f089166ca010ba3",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"products",
+								"update",
+								"6286e2927f089166ca010ba3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Mjg0MzMzYjRiNTdhZGRkNzJjNmU1ZjQiLCJuYW1lIjoiV2FsbWFydCIsInVzZXJuYW1lIjoiU3VwZXJBZG1pbiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1MzAwMTc5OCwiZXhwIjoxNjUzMDIzMzk4fQ.2HEmVGupuaRcqLokWtZzE_HthozeZTAL-pT98f4jPdA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3200/products/delete/6286cfe43992a7c253cff912",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"products",
+								"delete",
+								"6286cfe43992a7c253cff912"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Mjg2ZTFkMDhiYmU3ODViODc2ZTU1NDYiLCJuYW1lIjoiR2FsbG8iLCJ0eXBlT2ZDb21wYW55IjoiQmViaWRhcyIsInVzZXJuYW1lIjoiQ2VydmV6YUdhbGxvIiwicm9sZSI6IkNPTVBBTlkiLCJpYXQiOjE2NTMwMDY4MjQsImV4cCI6MTY1MzA1MDAyNH0.qojRGXxGfAiyP5HS7hOunas_i-bz38gc10hptRLnIc8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3200/products/getProduct/6286e2927f089166ca010ba3",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"products",
+								"getProduct",
+								"6286e2927f089166ca010ba3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Mjg2ZTFkMDhiYmU3ODViODc2ZTU1NDYiLCJuYW1lIjoiR2FsbG8iLCJ0eXBlT2ZDb21wYW55IjoiQmViaWRhcyIsInVzZXJuYW1lIjoiQ2VydmV6YUdhbGxvIiwicm9sZSI6IkNPTVBBTlkiLCJpYXQiOjE2NTMwMDY4MjQsImV4cCI6MTY1MzA1MDAyNH0.qojRGXxGfAiyP5HS7hOunas_i-bz38gc10hptRLnIc8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3200/products/getProducts",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"products",
+								"getProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Des",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3200/products/getProductsByAsc",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"products",
+								"getProductsByAsc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products Asc",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Mjg0MzMzYjRiNTdhZGRkNzJjNmU1ZjQiLCJuYW1lIjoiV2FsbWFydCIsInVzZXJuYW1lIjoiU3VwZXJBZG1pbiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1MzAyNzQ5NCwiZXhwIjoxNjUzMDcwNjk0fQ.xIvgzp6bQAuhi1KBrAbnfKzISWg9frs-EKpEx0NTh5E",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3200/products/getProductsByAsc",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"products",
+								"getProductsByAsc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products By Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Mjg3YTk5MTExMjI4MWVkNGMzOThiNTYiLCJuYW1lIjoiUG9sbG8gQ2FtcGVybyIsInR5cGVPZkNvbXBhbnkiOiJSZXN0YXVyYW50ZSIsInVzZXJuYW1lIjoiUG9sbG8iLCJyb2xlIjoiQ09NUEFOWSIsImlhdCI6MTY1MzA1Nzk2MSwiZXhwIjoxNjUzMTAxMTYxfQ.ajH2ATDmonOt1tqxtNuucfiCfajTysqB_v4q9LNPwwo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Alimentos",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/products/getProductByName",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"products",
+								"getProductByName"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products By Provider",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Mjg3YTk5MTExMjI4MWVkNGMzOThiNTYiLCJuYW1lIjoiUG9sbG8gQ2FtcGVybyIsInR5cGVPZkNvbXBhbnkiOiJSZXN0YXVyYW50ZSIsInVzZXJuYW1lIjoiUG9sbG8iLCJyb2xlIjoiQ09NUEFOWSIsImlhdCI6MTY1MzA1Nzk2MSwiZXhwIjoxNjUzMTAxMTYxfQ.ajH2ATDmonOt1tqxtNuucfiCfajTysqB_v4q9LNPwwo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "provider",
+									"value": "Carniceria",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3200/products/getProductByProvider",
+							"host": [
+								"localhost"
+							],
+							"port": "3200",
+							"path": [
+								"products",
+								"getProductByProvider"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products To Office",
+			"item": [
+				{
+					"name": "Add Product To Office",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Simulation Sell",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -107,7 +107,18 @@ exports.checkUpdateProduct = async (params) => {
         return err;
     }
 }
-
+exports.checkProductsUpdate = async (params) => {
+    try {
+        if (Object.entries(params).length === 0) {
+            return false;
+        } else {
+            return true;
+        }
+    } catch (err) {
+        console.log(err);
+        return err;
+    }
+}
 exports.checkUpdate_Admin = async (params) => {
     try {
         if (Object.entries(params).length === 0 || params.password) {

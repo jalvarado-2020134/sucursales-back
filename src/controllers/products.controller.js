@@ -2,7 +2,7 @@
 
 const Product = require('../models/products.model');
 const Company = require('../models/company.model');
-const {validateData, checkUpdateProduct, findProduct, checkProduct } = require('../utils/validate');
+const {validateData, checkProductsUpdate, findProduct, checkProduct, findProductOnCompany } = require('../utils/validate');
 const res = require('express/lib/response');
 
 exports.newProduct = async(req,res)=>{
@@ -38,11 +38,14 @@ exports.updateProduct = async(req,res)=>{
         const company = await Company.findOne({_id: req.user.sub});
         const checkProduct = await Product.findOne({_id: productId})
         if(checkProduct){
-            const checkProductCompany = await findProduct(company, checkProduct._id)
+            const checkUpdated = await checkProductsUpdate(params);
+            if(checkUpdated){
+                const checkProductCompany = await findProductOnCompany(company, checkProduct._id)
             if(checkProductCompany){
                 const updateProduct = await Product.findOneAndUpdate({_id: productId}, params,{new:true});
                 if(updateProduct){
                     return res.send({message: 'Product updated', updateProduct});
+            } 
                 }else{
                     return res.status(400).send({message: 'Could not update the product'})
                 }
@@ -66,7 +69,7 @@ exports.delete = async (req,res)=>{
         const company = await Company.findOne({_id: req.user.sub});
         const checkProduct = await Product.findOne({_id: productId});
         if(checkProduct){
-            const checkProductCompany = await findProduct(company, checkProduct._id);
+            const checkProductCompany = await findProductOnCompany(company, checkProduct._id);
             if(checkProductCompany){
                 const deleteProduct = await Product.findOneAndDelete({_id: productId});
                 await company.products.pull(checkProductCompany);
@@ -120,7 +123,7 @@ exports.getProducts = async(req,res)=>{
         console.log(err);
         return res.status(500).send({message: 'Error getting products'});
     }
-}
+} 
 
 exports.getProductsByDes = async(req,res)=>{
     try{
@@ -154,7 +157,7 @@ exports.getProductsByAsc = async(req,res)=>{
         console.log(err);
         return res.status(500).send({message: 'Error'});
     }
-}
+} 
 
 exports.productsByName = async(req,res)=>{
     try{
